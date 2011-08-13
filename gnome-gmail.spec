@@ -13,15 +13,15 @@ BuildRequires:	gettext
 BuildRequires:	intltool
 Requires:	control-center
 Requires:	gconf-editor
-Requires:	gnome-python2-gconf
-Requires:	gnome-python2-gnomekeyring
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	hicolor-icon-theme
-Requires:	pygtk2-libglade
 Requires:	python >= 1:2.6
 Requires:	python-dbus
+Requires:	python-gnome-desktop-keyring
+Requires:	python-gnome-gconf
 Requires:	python-pygobject
+Requires:	python-pygtk-glade
 BuildArch:	noarch
 Requires(post):	GConf2
 Requires(postun):	GConf2
@@ -47,7 +47,10 @@ echo "MimeType=application/mbox;message/rfc822;x-scheme-handler/mailto" >> \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/ta_LK/LC_MESSAGES
 
 %find_lang %{name}
 
@@ -62,7 +65,7 @@ desktop-file-install \
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%gconf_schema_install %{name}
+%gconf_schema_install %{name}.schemas
 %update_desktop_database
 %update_icon_cache_post hicolor
 
@@ -76,10 +79,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{name}
 %attr(755,root,root) %{_bindir}/setOOmailer
 %{_desktopdir}/%{name}.desktop
-%{_datadir}/gnome-control-center/default-apps/%{name}.xml
+# gnome2:
+#%{_datadir}/gnome-control-center/default-apps/%{name}.xml
 %{_iconsdir}/hicolor/*/apps/%{name}.png
+%dir %{_datadir}/%{name}
 %{_datadir}/%{name}/gnomegmail.glade
-%{_datadir}/%{name}/evolution
+%attr(755,root,root) %{_datadir}/%{name}/evolution
 %{_datadir}/gnome/autostart/setOOmailer.desktop
 %{_mandir}/man1/%{name}*
 %{_mandir}/man1/setOOmailer*
