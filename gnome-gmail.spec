@@ -2,7 +2,7 @@ Summary:	Integrate GMail into the GNOME desktop
 Summary(fr.UTF-8):	Intègre GMail dans l'environnement de bureau GNOME
 Name:		gnome-gmail
 Version:	1.7.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Networking
 URL:		http://gnome-gmail.sourceforge.net/
@@ -67,11 +67,11 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %gconf_schema_install %{name}.schemas
 %update_desktop_database
-%update_icon_cache_post hicolor
+%update_icon_cache hicolor
 
 %postun
 %update_desktop_database
-%update_icon_cache_post hicolor
+%update_icon_cache hicolor
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
