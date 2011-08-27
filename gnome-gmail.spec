@@ -1,13 +1,13 @@
 Summary:	Integrate GMail into the GNOME desktop
 Summary(fr.UTF-8):	Intègre GMail dans l'environnement de bureau GNOME
 Name:		gnome-gmail
-Version:	1.7.2
-Release:	2
+Version:	1.8
+Release:	1
 License:	GPL v2
 Group:		Applications/Networking
 URL:		http://gnome-gmail.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/gnome-gmail/%{name}-%{version}.tar.gz
-# Source0-md5:	3d9eb34d8f143f40125e1f6063edc15f
+# Source0-md5:	909d04f64d3438e1462efe3569e2f12b
 BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	intltool
@@ -38,8 +38,6 @@ sera ensuite ouvert dans le navigateur web préféré.
 
 %prep
 %setup -q
-echo "MimeType=application/mbox;message/rfc822;x-scheme-handler/mailto" >> \
-    %{name}.desktop.in
 
 %build
 %configure \
@@ -50,7 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/ta_LK/LC_MESSAGES
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ta_LK/LC_MESSAGES
 
 %find_lang %{name}
 
