@@ -1,13 +1,13 @@
 Summary:	Integrate GMail into the GNOME desktop
 Summary(fr.UTF-8):	Intègre GMail dans l'environnement de bureau GNOME
 Name:		gnome-gmail
-Version:	1.8
+Version:	1.8.1
 Release:	1
 License:	GPL v2
 Group:		Applications/Networking
 URL:		http://gnome-gmail.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/gnome-gmail/%{name}-%{version}.tar.gz
-# Source0-md5:	909d04f64d3438e1462efe3569e2f12b
+# Source0-md5:	d8dbb7954e6ebf8553d2cf6c417404d9
 BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	intltool
