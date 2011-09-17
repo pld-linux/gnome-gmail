@@ -2,7 +2,7 @@ Summary:	Integrate GMail into the GNOME desktop
 Summary(fr.UTF-8):	Intègre GMail dans l'environnement de bureau GNOME
 Name:		gnome-gmail
 Version:	1.8.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Networking
 URL:		http://gnome-gmail.sourceforge.net/
@@ -48,16 +48,21 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ta_LK/LC_MESSAGES
-
-%find_lang %{name}
-
 desktop-file-install \
     --dir=$RPM_BUILD_ROOT%{_desktopdir} \
     --add-category Network \
     --remove-category System \
     --remove-category ContactManagement \
     %{name}.desktop
+
+# no gnome2:
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/gnome-control-center/default-apps/%{name}.xml
+
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ta_LK/LC_MESSAGES
+mv $RPM_BUILD_ROOT%{_datadir}/locale/{el_GR,el}
+
+%find_lang %{name}
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,8 +82,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{name}
 %attr(755,root,root) %{_bindir}/setOOmailer
 %{_desktopdir}/%{name}.desktop
-# gnome2:
-#%{_datadir}/gnome-control-center/default-apps/%{name}.xml
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/gnomegmail.glade
